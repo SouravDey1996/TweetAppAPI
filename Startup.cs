@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,15 +22,22 @@ namespace TweetAppAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<KestrelServerOptions>(options=>{
+                options.AllowSynchronousIO=true;
+            });
+            services.AddMetrics();
             services.AddSingleton<IMongoClient, MongoClient>(s =>
              {
                  var uri = s.GetRequiredService<IConfiguration>()["MongoUri"];
                  return new MongoClient(uri);
              });
             services.Configure<SMTPConfig>(Configuration.GetSection("SMTPConfig"));
-            services.AddTransient<ITweetAppRepository, TweetAppRepository>();
+            services.AddTransient<IUserRepo, UserRepo>();
+            services.AddTransient<ITweetRepo, TweetRepo>();
             services.AddControllers();
+             services.AddSwaggerGen();
             services.AddCors();
+
 
         }
 
@@ -39,7 +47,15 @@ namespace TweetAppAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }            
+            }     
+              app.UseSwagger();
+
+    // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+    // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });       
             app.UseRouting();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthorization();

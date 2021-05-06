@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using TweetAppAPI.Models;
 
 namespace TweetAppAPI.Repository
 {
-    public interface ITweetAppRepository
+    public interface IUserRepo
     {
         public List<User> GetAllUsers();
         public User GetUserByLoginId(string loginId);
@@ -11,9 +14,6 @@ namespace TweetAppAPI.Repository
         public User GetUserByEmailId(string email);
         public int LoginUser(string loginId, string password);
         public int RegisterUser(User user);
-        public List<Tweet> GetTweets();
-        public int PostTweet(Tweet tweet);
-        public int PostReply(Reply reply);
         public string SendOTP(string loginId);
         public int ResetPassword(string loginId, string password);
     }
