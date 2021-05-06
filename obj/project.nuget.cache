@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qDI1dIMXqN2Drhm+lxy9xYYa2rcVhOfa3G6TBGtWjAo5WqZJfsZIODKqUPgD1Jw789UXmASlDj3o47eaxLncDA==",
+  "dgSpecHash": "oy5/HuvHJ8hEysb3t/DfcikJE3LxxIqodg9jot6jwtQWNjOi2MXB5Rg0xuil72S/XkB6IySE8mT1nOJ7A1FTgA==",
   "success": true,
-  "projectFilePath": "D:\\Project\\latest\\TweetAppAPI-master\\TweetAppAPI\\TweetAppAPI.csproj",
+  "projectFilePath": "D:\\Project\\Test\\TweetAppAPI-master\\TweetAppAPI\\TweetAppAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\bl471\\.nuget\\packages\\confluent.kafka\\1.6.3\\confluent.kafka.1.6.3.nupkg.sha512",
     "C:\\Users\\bl471\\.nuget\\packages\\dnsclient\\1.4.0\\dnsclient.1.4.0.nupkg.sha512",
